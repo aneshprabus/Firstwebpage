@@ -1,31 +1,31 @@
 // ======================================================
 // AI Learning Portal
-// Global Configuration
+// Combined Configuration + Main Script
 // ======================================================
 
-// ===============================
-// Import Supabase
-// ===============================
+
+// ======================================================
+// Import Libraries
+// ======================================================
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// ===============================
-// Import Firebase
-// ===============================
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
 
 
 // ======================================================
-// Application Information
+// Application Configuration
 // ======================================================
 
-export const APP_CONFIG = {
+const APP = {
 
-    appName: "AI Learning Portal",
+    name: "AI Learning Portal",
 
     version: "1.0.0",
+
+    author: "Aneshprabu",
 
     environment: "Development"
 
@@ -36,11 +36,11 @@ export const APP_CONFIG = {
 // Supabase Configuration
 // ======================================================
 
-const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
 
 const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 
-export const supabase = createClient(
+const supabase = createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
 );
@@ -70,15 +70,88 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-export const analytics = getAnalytics(firebaseApp);
+const analytics = getAnalytics(firebaseApp);
 
 
 // ======================================================
-// Console Logs
+// Website Starts Here
 // ======================================================
 
-console.log(APP_CONFIG.appName + " initialized");
+document.addEventListener("DOMContentLoaded", async () => {
 
-console.log("✅ Supabase Connected");
+    console.clear();
 
-console.log("✅ Firebase Connected");
+    console.log("======================================");
+
+    console.log(APP.name);
+
+    console.log("Version :", APP.version);
+
+    console.log("Environment :", APP.environment);
+
+    console.log("======================================");
+
+
+    // -----------------------------------
+    // Button Click
+    // -----------------------------------
+
+    const startButton = document.getElementById("startBtn");
+
+    if (startButton) {
+
+        startButton.addEventListener("click", () => {
+
+            alert("Training Module Coming Soon!");
+
+        });
+
+    }
+
+
+    // -----------------------------------
+    // Test Supabase Connection
+    // -----------------------------------
+
+    try {
+
+        const { data, error } = await supabase
+
+            .from("training_cards")
+
+            .select("*")
+
+            .limit(5);
+
+        if (error) {
+
+            console.error("Supabase Error");
+
+            console.error(error);
+
+        } else {
+
+            console.log("Supabase Connected Successfully");
+
+            console.table(data);
+
+        }
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
+
+
+    // -----------------------------------
+    // Firebase Status
+    // -----------------------------------
+
+    console.log("Firebase Initialized Successfully");
+
+    console.log(analytics);
+
+});
