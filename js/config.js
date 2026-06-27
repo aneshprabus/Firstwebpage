@@ -36,9 +36,9 @@ const APP = {
 // Supabase Configuration
 // ======================================================
 
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_URL = "https://chpddsreyiznimnlljga.supabase.co";
 
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_ANON_KEY = "sb_publishable_UCOQDQyHuQUdSt8xvWU1_Q_pIcAr5pS";
 
 const supabase = createClient(
     SUPABASE_URL,
@@ -52,7 +52,7 @@ const supabase = createClient(
 
 const firebaseConfig = {
 
-    apiKey: "YOUR_FIREBASE_API_KEY",
+    apiKey: "AIzaSyAHKJYUkR_hrMkpVFnM0MxVrbdWvFZMLKw",
 
     authDomain: "firstfirebase-6251a.firebaseapp.com",
 
@@ -60,11 +60,11 @@ const firebaseConfig = {
 
     storageBucket: "firstfirebase-6251a.firebasestorage.app",
 
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    messagingSenderId: "305076112487",
 
     appId: "1:305076112487:web:0580bdb217b7724cfbd8c2",
 
-    measurementId: "YOUR_MEASUREMENT_ID"
+    measurementId: "G-3RYN4MG9YK"
 
 };
 
