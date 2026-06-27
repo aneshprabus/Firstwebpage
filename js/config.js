@@ -22,9 +22,9 @@ const APP_CONFIG = {
 
 const SUPABASE_CONFIG = {
 
-    url: "https://jocuisqnrnkzzbontlqm.supabase.co",
+    url: "https://chpddsreyiznimnlljga.supabase.co",
 
-    anonKey: "sb_publishable_rvLs-6kiyS8lCcDejyn31w_3bjJj0fL"
+    anonKey: "sb_publishable_UCOQDQyHuQUdSt8xvWU1_Q_pIcAr5pS"
 
 };
 
