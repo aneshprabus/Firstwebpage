@@ -1,80 +1,38 @@
 // ======================================================
-// AI Learning Portal
-// Combined Configuration + Main Script
+// Universal Header & Footer Loader
 // ======================================================
 
+async function loadComponent(id, file) {
 
-// ======================================================
-// Import Libraries
-// ======================================================
+    const element = document.getElementById(id);
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+    if (!element) return;
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    try {
 
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+        const response = await fetch(file);
 
+        if (!response.ok) {
 
-// ======================================================
-// Application Configuration
-// ======================================================
+            throw new Error(`Unable to load ${file}`);
 
-const APP = {
+        }
 
-    name: "AI Learning Portal",
+        element.innerHTML = await response.text();
 
-    version: "1.0.0",
+    }
 
-    author: "Aneshprabu",
+    catch (error) {
 
-    environment: "Development"
+        console.error(error);
 
-};
+    }
 
-
-// ======================================================
-// Supabase Configuration
-// ======================================================
-
-const SUPABASE_URL = "https://chpddsreyiznimnlljga.supabase.co";
-
-const SUPABASE_ANON_KEY = "sb_publishable_UCOQDQyHuQUdSt8xvWU1_Q_pIcAr5pS";
-
-const supabase = createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+}
 
 
 // ======================================================
-// Firebase Configuration
-// ======================================================
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyAHKJYUkR_hrMkpVFnM0MxVrbdWvFZMLKw",
-
-    authDomain: "firstfirebase-6251a.firebaseapp.com",
-
-    projectId: "firstfirebase-6251a",
-
-    storageBucket: "firstfirebase-6251a.firebasestorage.app",
-
-    messagingSenderId: "305076112487",
-
-    appId: "1:305076112487:web:0580bdb217b7724cfbd8c2",
-
-    measurementId: "G-3RYN4MG9YK"
-
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
-
-const analytics = getAnalytics(firebaseApp);
-
-
-// ======================================================
-// Website Starts Here
+// Website Initialization
 // ======================================================
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -92,9 +50,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("======================================");
 
 
-    // -----------------------------------
-    // Button Click
-    // -----------------------------------
+    // --------------------------------------------
+    // Load Universal Components
+    // --------------------------------------------
+
+    await loadComponent("header", "components/header.html");
+
+    await loadComponent("footer", "components/footer.html");
+
+
+    // --------------------------------------------
+    // Highlight Current Page
+    // --------------------------------------------
+
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    document.querySelectorAll(".navbar a").forEach(link => {
+
+        if (link.getAttribute("href") === currentPage) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+
+    // --------------------------------------------
+    // Hero Button
+    // --------------------------------------------
 
     const startButton = document.getElementById("startBtn");
 
@@ -109,9 +93,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    // -----------------------------------
-    // Test Supabase Connection
-    // -----------------------------------
+    // --------------------------------------------
+    // Supabase Test
+    // --------------------------------------------
 
     try {
 
@@ -125,13 +109,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (error) {
 
-            console.error("Supabase Error");
-
             console.error(error);
 
-        } else {
+        }
 
-            console.log("Supabase Connected Successfully");
+        else {
+
+            console.log("✅ Supabase Connected");
 
             console.table(data);
 
@@ -146,48 +130,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-    // -----------------------------------
-    // Firebase Status
-    // -----------------------------------
+    // --------------------------------------------
+    // Firebase
+    // --------------------------------------------
 
-    console.log("Firebase Initialized Successfully");
+    console.log("✅ Firebase Connected");
 
     console.log(analytics);
 
-});
+    console.log("======================================");
 
-// ======================================
-// Load Header & Footer
-// ======================================
+    console.log("Website Ready");
 
-async function loadComponent(id, file) {
-
-    const element = document.getElementById(id);
-
-    if (!element) return;
-
-    try {
-
-        const response = await fetch(file);
-
-        const html = await response.text();
-
-        element.innerHTML = html;
-
-    }
-
-    catch (error) {
-
-        console.error("Unable to load:", file);
-
-    }
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    loadComponent("header", "components/header.html");
-
-    loadComponent("footer", "components/footer.html");
+    console.log("======================================");
 
 });
