@@ -155,3 +155,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log(analytics);
 
 });
+
+// ======================================
+// Load Header & Footer
+// ======================================
+
+async function loadComponent(id, file) {
+
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    try {
+
+        const response = await fetch(file);
+
+        const html = await response.text();
+
+        element.innerHTML = html;
+
+    }
+
+    catch (error) {
+
+        console.error("Unable to load:", file);
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    loadComponent("header", "components/header.html");
+
+    loadComponent("footer", "components/footer.html");
+
+});
