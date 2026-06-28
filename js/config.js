@@ -52,7 +52,7 @@ const supabase = createClient(
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyAHKJYUkR_hrMkpVFnM0MxVrbdWvFZMLKw",
+    apiKey: "Remove the key",
 
     authDomain: "firstfirebase-6251a.firebaseapp.com",
 
